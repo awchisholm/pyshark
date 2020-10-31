@@ -412,6 +412,8 @@ class Capture(object):
                 return await asyncio.wait_for(process.wait(), 1)
             except concurrent.futures.TimeoutError:
                 self._log.debug("Waiting for process to close failed, may have zombie process.")
+            except asyncio.exceptions.TimeoutError:
+                pass
             except ProcessLookupError:
                 pass
             except OSError:
